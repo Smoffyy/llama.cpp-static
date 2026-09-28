@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { LOAD_DEFAULTS, type ModelOverride } from '../utils';
+	import type { ModelOverride } from '../utils';
 	import ModelsManagerModelConfigurationHeader from './ModelsManagerModelConfigurationHeader.svelte';
 	import ModelsManagerModelConfigurationInference from './ModelsManagerModelConfigurationInference.svelte';
 	import ModelsManagerModelConfigurationInformation from './ModelsManagerModelConfigurationInformation.svelte';
 	import ModelsManagerModelConfigurationLoad from './ModelsManagerModelConfigurationLoad.svelte';
 	import * as Tabs from '$lib/components/ui/tabs';
-	import { MODEL_ID, SETTINGS_KEYS } from '$lib/constants';
+	import { LOAD_DEFAULTS, MODEL_ID, SETTINGS_KEYS } from '$lib/constants';
 	import { ServerModelStatus } from '$lib/enums';
 	import { HuggingFaceService } from '$lib/services';
 	import { modelsStore, settingsStore } from '$lib/stores';
@@ -65,7 +65,10 @@
 
 		hubDetails = null;
 
-		if (!settingsStore.config[SETTINGS_KEYS.USE_HUGGING_FACE_HUB] || !repo.includes(MODEL_ID.ORG_SEPARATOR)) {
+		if (
+			!settingsStore.config[SETTINGS_KEYS.USE_HUGGING_FACE_HUB] ||
+			!repo.includes(MODEL_ID.ORG_SEPARATOR)
+		) {
 			return;
 		}
 
